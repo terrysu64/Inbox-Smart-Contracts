@@ -3,22 +3,34 @@ const ganache = require('ganache-cli');
 const Web3 = require('web3') //constructor function
 const web3 = new Web3(ganache.provider());
 const { interface, bytecode } = require('../compile')
-
+ 
 //get list of all accounts and use one to deploy contract
 let accounts;
 let inbox
 beforeEach(async () => {
     accounts = await web3.eth.getAccounts()
     inbox = await new web3.eth.Contract(JSON.parse(interface))
-        .deploy({ data: bytecode, arguments: ['hello contract']})
-        .send({ from: accounts[0], gas: '1000000'})
+        .deploy({ data: bytecode, arguments: ['hello contract']}) //deploy
+        .send({ from: accounts[0], gas: '1000000'}) //transaction
 })
 
 describe('Inbox', () => {
     it('deploys a contract', () => {
-        console.log(accounts)
-        console.log(inbox)
+        assert.ok(inbox.options.address);
     })
+
+    it('has a default message', async () => {
+        const STRING = 'hello contract'
+        const message = await inbox.methods.message().call()
+        assert.equal(message, STRING)
+    })
+
+    it('can update the message', async () => {
+        await inbox.methods.setMessage('bye').send({ from: accounts[0] })
+        const message = await inbox.methods.message().call()
+        assert.equal(message, 'bye')
+    })
+
 })
 
 // class Car {
