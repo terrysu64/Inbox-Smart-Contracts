@@ -32,33 +32,3 @@ describe('Inbox', () => {
     })
 
 })
-
-// class Car {
-//     park() {
-//         return 'stopped';
-//     }
-
-//     drive() {
-//         return 'driving';
-//     }
-// }
-
-// let car;
-
-// beforeEach(() => {
-//     console.log("before each running")
-//     car = new Car();
-// })
-
-// describe('Car', () => {
-//     it('can park', () => {
-//         assert.equal(car.park(), 'stopped');
-//     });
-//     it('can drive', () => {
-//         assert.equal(car.drive(), 'driving')
-//     })
-// })
-
-
-
-
