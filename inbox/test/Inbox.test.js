@@ -4,7 +4,7 @@ const Web3 = require('web3') //constructor function
 const web3 = new Web3(ganache.provider());
 const { interface, bytecode } = require('../compile')
  
-//get list of all accounts and use one to deploy contract
+//get list of all accounts and use one to deploy contract (testing deployment on ganache)
 let accounts;
 let inbox
 beforeEach(async () => {
